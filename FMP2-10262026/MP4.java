@@ -68,28 +68,28 @@ public class MP4 {
         int id = readInt();
         if (id == -1) return;
         if (inventory.containsKey(id)) {
-            System.out.println("Rejected; duplicate ID.");
+            System.out.println("Rejected; duplicate ID");
             return;
         }
 
         System.out.print("Enter Name: ");
         String name = scanner.nextLine().trim();
         if (name.isEmpty()) {
-            System.out.println("Rejected; name cannot be empty.");
+            System.out.println("Rejected; name cannot be empty");
             return;
         }
 
         System.out.print("Enter Price: ");
         double price = readDouble();
         if (price < 0) {
-            System.out.println("Rejected; price must be positive.");
+            System.out.println("Rejected; invalid price");
             return;
         }
 
         System.out.print("Enter Stock: ");
         int stock = readInt();
         if (stock < 0) {
-            System.out.println("Rejected; stock must be positive.");
+            System.out.println("Rejected; invalid stock");
             return;
         }
 
@@ -119,7 +119,7 @@ public class MP4 {
                 p.addStock(qty);
                 System.out.println(p.getName() + " stock " + p.getStock());
             } else {
-                System.out.println("Rejected; invalid quantity.");
+                System.out.println("Rejected; invalid quantity");
             }
         } else {
             System.out.println("Product not found");
@@ -140,7 +140,7 @@ public class MP4 {
                     System.out.println("Rejected; stock remains " + p.getStock());
                 }
             } else {
-                System.out.println("Rejected; invalid quantity.");
+                System.out.println("Rejected; invalid quantity");
             }
         } else {
             System.out.println("Product not found");
