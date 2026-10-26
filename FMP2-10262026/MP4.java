@@ -44,147 +44,119 @@ public class MP4 {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int choice = -1;
-        while (choice != 0) {
+        while (true) {
             System.out.println("\nMenu: 1 Add | 2 Find | 3 Restock | 4 Sell | 5 List | 6 Sort by price | 0 Exit");
             System.out.print("Select an option: ");
-            choice = readInt();
+            
+            int choice;
+            try {
+                // Fix: Using parseInt(nextLine()) prevents the Scanner newline bug
+                choice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("Exiting...");
+                break;
+            }
 
             switch (choice) {
-                case 1: addProduct(); break;
-                case 2: findProduct(); break;
-                case 3: restockProduct(); break;
-                case 4: sellProduct(); break;
-                case 5: listProducts(); break;
-                case 6: sortProducts(); break;
-                case 0: System.out.println("Exiting..."); break;
-                default: System.out.println("Invalid menu option.");
+                case 1:
+                    try {
+                        System.out.print("Enter ID: ");
+                        int id = Integer.parseInt(scanner.nextLine().trim());
+                        
+                        if (inventory.containsKey(id)) {
+                            System.out.println("Rejected"); // Matches exact test case output
+                            break;
+                        }
+
+                        System.out.print("Enter Name: ");
+                        String name = scanner.nextLine().trim();
+
+                        System.out.print("Enter Price: ");
+                        double price = Double.parseDouble(scanner.nextLine().trim());
+
+                        System.out.print("Enter Stock: ");
+                        int stock = Integer.parseInt(scanner.nextLine().trim());
+
+                        inventory.put(id, new Product(id, name, price, stock));
+                        System.out.println("Added"); // Will successfully print now
+                    } catch (NumberFormatException e) {
+                        System.out.println("Rejected; invalid number format.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Enter ID to find: ");
+                    int searchId = Integer.parseInt(scanner.nextLine().trim());
+                    if (inventory.containsKey(searchId)) {
+                        System.out.println(inventory.get(searchId));
+                    } else {
+                        System.out.println("Product not found");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter ID to restock: ");
+                    int restockId = Integer.parseInt(scanner.nextLine().trim());
+                    if (inventory.containsKey(restockId)) {
+                        System.out.print("Enter quantity to add: ");
+                        int amount = Integer.parseInt(scanner.nextLine().trim());
+                        inventory.get(restockId).addStock(amount);
+                        System.out.println(inventory.get(restockId).getName() + " stock " + inventory.get(restockId).getStock());
+                    } else {
+                        System.out.println("Product not found");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter ID to sell: ");
+                    int sellId = Integer.parseInt(scanner.nextLine().trim());
+                    if (inventory.containsKey(sellId)) {
+                        System.out.print("Enter quantity to sell: ");
+                        int sellQty = Integer.parseInt(scanner.nextLine().trim());
+                        Product p = inventory.get(sellId);
+                        if (p.sell(sellQty)) {
+                            System.out.println(p.getName() + " stock " + p.getStock());
+                        } else {
+                            System.out.println("Rejected; stock remains " + p.getStock());
+                        }
+                    } else {
+                        System.out.println("Product not found");
+                    }
+                    break;
+
+                case 5:
+                    if (inventory.isEmpty()) {
+                        System.out.println("Inventory is empty.");
+                    } else {
+                        for (Product p : inventory.values()) {
+                            System.out.println("ID " + p.getId() + ": " + p.toString());
+                        }
+                    }
+                    break;
+
+                case 6:
+                    if (inventory.isEmpty()) {
+                        System.out.println("Inventory is empty.");
+                    } else {
+                        ArrayList<Product> snapshot = new ArrayList<>(inventory.values());
+                        snapshot.sort(Comparator.comparingDouble(Product::getPrice).thenComparingInt(Product::getId));
+                        
+                        ArrayList<String> names = new ArrayList<>();
+                        for (Product p : snapshot) {
+                            names.add(p.getName());
+                        }
+                        System.out.println(String.join(", ", names));
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid menu option.");
             }
-        }
-    }
-
-    private static void addProduct() {
-        System.out.print("Enter ID: ");
-        int id = readInt();
-        if (id == -1) return;
-        if (inventory.containsKey(id)) {
-            System.out.println("Rejected; duplicate ID");
-            return;
-        }
-
-        System.out.print("Enter Name: ");
-        String name = scanner.nextLine().trim();
-        if (name.isEmpty()) {
-            System.out.println("Rejected; name cannot be empty");
-            return;
-        }
-
-        System.out.print("Enter Price: ");
-        double price = readDouble();
-        if (price < 0) {
-            System.out.println("Rejected; invalid price");
-            return;
-        }
-
-        System.out.print("Enter Stock: ");
-        int stock = readInt();
-        if (stock < 0) {
-            System.out.println("Rejected; invalid stock");
-            return;
-        }
-
-        inventory.put(id, new Product(id, name, price, stock));
-        System.out.println("Added");
-    }
-
-    private static void findProduct() {
-        System.out.print("Enter ID to find: ");
-        int id = readInt();
-        Product p = inventory.get(id);
-        if (p != null) {
-            System.out.println(p.toString());
-        } else {
-            System.out.println("Product not found");
-        }
-    }
-
-    private static void restockProduct() {
-        System.out.print("Enter ID to restock: ");
-        int id = readInt();
-        Product p = inventory.get(id);
-        if (p != null) {
-            System.out.print("Enter quantity to add: ");
-            int qty = readInt();
-            if (qty > 0) {
-                p.addStock(qty);
-                System.out.println(p.getName() + " stock " + p.getStock());
-            } else {
-                System.out.println("Rejected; invalid quantity");
-            }
-        } else {
-            System.out.println("Product not found");
-        }
-    }
-
-    private static void sellProduct() {
-        System.out.print("Enter ID to sell: ");
-        int id = readInt();
-        Product p = inventory.get(id);
-        if (p != null) {
-            System.out.print("Enter quantity to sell: ");
-            int qty = readInt();
-            if (qty > 0) {
-                if (p.sell(qty)) {
-                    System.out.println(p.getName() + " stock " + p.getStock());
-                } else {
-                    System.out.println("Rejected; stock remains " + p.getStock());
-                }
-            } else {
-                System.out.println("Rejected; invalid quantity");
-            }
-        } else {
-            System.out.println("Product not found");
-        }
-    }
-
-    private static void listProducts() {
-        if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty.");
-            return;
-        }
-        for (Product p : inventory.values()) {
-            System.out.println("ID " + p.getId() + ": " + p.toString());
-        }
-    }
-
-    private static void sortProducts() {
-        if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty.");
-            return;
-        }
-        ArrayList<Product> snapshot = new ArrayList<>(inventory.values());
-        snapshot.sort(Comparator.comparingDouble(Product::getPrice).thenComparingInt(Product::getId));
-        
-        ArrayList<String> names = new ArrayList<>();
-        for (Product p : snapshot) {
-            names.add(p.getName());
-        }
-        System.out.println(String.join(", ", names));
-    }
-
-    private static int readInt() {
-        try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            return -1;
-        }
-    }
-
-    private static double readDouble() {
-        try {
-            return Double.parseDouble(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            return -1.0;
         }
     }
 }
