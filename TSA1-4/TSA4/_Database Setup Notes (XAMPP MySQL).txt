@@ -1,0 +1,32 @@
+           			 SETUP NOTES: 
+
+------------------------------------------------------------------------------
+	       BookBridge
+-------------------------------------------------------------------------------
+
+Open the XAMPP Control Panel and start Apache and MySQL.  
+ Open phpMyAdmin (http://localhost/phpmyadmin), go to the SQL tab, and run 
+schema.sql to create bookbridge_db and the four normalized tables (members,
+ books, loans, reservations) with primary keys, foreign keys, ENUM status
+ constraints, CHECK constraints, and timestamps.   
+In NetBeans, pom.xml loads mysql-connector-j (v8.3.0). 
+Database credentials are centralized in dao.DBConnection
+ using environment variables (BOOKBRIDGE_DB_URL, BOOKBRIDGE_DB_USER,
+ BOOKBRIDGE_DB_PASS) with local XAMPP defaults (root, blank password).
+
+--------------------------------------------------------------------------------
+             CAMPUS CONNECT
+--------------------------------------------------------------------------------
+
+Database Setup Notes (XAMPP MySQL)
+Start Apache and MySQL in the XAMPP Control Panel.
+Open phpMyAdmin (http://localhost/phpmyadmin), go to the SQL tab, and run 
+CampusConnect_schema.sql to create campusconnect_db with the students and 
+service_requests tables (enforcing primary/foreign keys, ENUM categories/statuses, 
+CHECK (priority BETWEEN 1 AND 5), and timestamps).   
+
+In NetBeans, pom.xml loads mysql-connector-j (v8.3.0), and dao.DBConnection 
+centralizes credentials using environment variables (CAMPUS_DB_URL, CAMPUS_DB_USER,
+CAMPUS_DB_PASS) with local XAMPP defaults.  
+
+---------------------------------------------------------------------------------

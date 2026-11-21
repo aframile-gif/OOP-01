@@ -1,0 +1,11 @@
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\app\BookBridgeFrame.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\dao\BookBridgeDao.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\dao\DBConnection.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\exception\DuplicateEntityException.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\exception\ItemUnavailableException.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\exception\LoanLimitExceededException.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\model\LibraryBook.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\model\LoanRecord.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\model\Member.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\model\Reservation.java
+X:\School\2ndYEAR\OOP\TSA4\BookBridge_TSA4\src\main\java\service\LibraryService.java
