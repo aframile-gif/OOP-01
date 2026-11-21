@@ -1,0 +1,17 @@
+model\Notifiable.class
+model\LoanRecord.class
+exception\DuplicateEntityException.class
+model\Member$MembershipType.class
+exception\ItemUnavailableException.class
+model\LibraryBook.class
+model\LoanRecord$LoanStatus.class
+model\StudentMember.class
+model\Member.class
+model\GuestMember.class
+model\Reservation.class
+app\BookBridgeApp.class
+model\LibraryBook$BookStatus.class
+exception\LoanLimitExceededException.class
+service\LibraryService$CirculationSummary.class
+service\LibraryService.class
+model\FacultyMember.class

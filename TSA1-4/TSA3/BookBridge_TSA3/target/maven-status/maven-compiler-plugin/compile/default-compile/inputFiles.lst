@@ -1,0 +1,9 @@
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\app\BookBridgeApp.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\exception\DuplicateEntityException.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\exception\ItemUnavailableException.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\exception\LoanLimitExceededException.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\model\LibraryBook.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\model\LoanRecord.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\model\Member.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\model\Reservation.java
+X:\School\2ndYEAR\OOP\TSA3\BookBridge_TSA3\src\main\java\service\LibraryService.java
